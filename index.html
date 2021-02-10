@@ -25,7 +25,6 @@
         <a class="nav-item" onclick="showMenu()" href="#home">HOME</a>
         <a class="nav-item" onclick="showMenu()" href="#help">HELP</a>
         <a class="nav-item" onclick="showMenu()" href="#draw">CREATE SKETCH</a>
-        
       </div>
       <a class="hamburger" id="hamburger" onclick="showMenu()">
         <i class="fa fa-bars hamburger-btn"></i>
@@ -45,7 +44,9 @@
       </div>
       <div class="draw tab" id="draw">
         <h1>Start Drawing</h1>
-        
+        <div class="canvas-container">
+          <canvas id="glCanvas"></canvas>
+        </div>
       </div>
     </div>
     <div class="footer">
@@ -54,4 +55,6 @@
     </div>
   </body>
   <script src="scripts/event.js"></script>
+  <script src="scripts/shader.js"></script>
+  <script src="scripts/main.js"></script>
 </html>

@@ -1,7 +1,6 @@
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
-
 
 h1,
 h2,
@@ -142,8 +141,8 @@ nav {
       flex-wrap: wrap;
 
       img {
-          margin: 100px 0 20px!important;
-          padding: 0 20px;
+        margin: 100px 0 20px !important;
+        padding: 0 20px;
       }
     }
 
@@ -187,7 +186,6 @@ nav {
       }
 
       @media (max-width: 768px) {
-
         h1 {
           font-size: 3rem;
         }
@@ -209,9 +207,9 @@ nav {
       }
 
       button:hover {
-          cursor: pointer;
-          background-image: linear-gradient(-15deg, #2883ab, #a580e8);
-          transform: scale(1.1);
+        cursor: pointer;
+        background-image: linear-gradient(-15deg, #2883ab, #a580e8);
+        transform: scale(1.1);
       }
     }
 
@@ -256,6 +254,38 @@ nav {
 
     h1 {
       color: #5f3d9a;
+    }
+
+    .canvas-container {
+      text-align: center;
+      width: 90%;
+      margin: 0 auto 80px;
+      height: 60vh;
+      border: 10px solid;
+      border-image-slice: 1;
+      border-width: 5px;
+      border-image-source: linear-gradient(-45deg, #2883ab, #a580e8);
+      position: relative;
+      z-index: 3;
+
+      canvas {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 3;
+        background-color: white;
+      }
+    }
+    .canvas-container::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(-45deg, #2883ab, #a580e8);
+      filter: blur(20px);
+      z-index: -20;
     }
   }
 }
