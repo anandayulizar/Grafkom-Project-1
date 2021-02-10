@@ -34,7 +34,10 @@ function main() {
     },
   };
 
-  console.log(programInfo)
+  console.log(programInfo);
+  const buffers = initBuffers(gl);
+
+  drawScene(gl, programInfo, buffers);
 }
 
 window.onload = main;
