@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/style.css" />
+    <title>Web GL Demo</title>
+  </head>
+  <body>
+    <nav id="navbar">
+      <div class="nav-brand">
+        <h2>WebGL Demo</h2>
+      </div>
+      <div class="nav-menu none" id="navMenu">
+        <a class="nav-item" href="#home">HOME</a>
+        <a class="nav-item" href="#help">HELP</a>
+        <a class="nav-item" href="#draw">CREATE SKETCH</a>
+        
+      </div>
+      <a class="hamburger" id="hamburger" onclick="showMenu()">
+        <i class="fa fa-bars hamburger-btn"></i>
+      </a>
+    </nav>
+    <div class="main">
+      <div class="landing" id="home">
+        <img src="public/images/landing.png" alt="" />
+        <div class="title">
+          <h1>Create Your Sketch</h1>
+          <button onclick="getStarted()">Get Started</button>
+        </div>
+      </div>
+      <div class="help tab" id="help">
+        <h1>Tutorial</h1>
+        
+      </div>
+      <div class="draw tab" id="draw">
+        <h1>Start Drawing</h1>
+        
+      </div>
+    </div>
+    <div class="footer">
+      <h4>Tugas Besar Grafika Komputer</h4>
+      <p>&#169;Nanda, Rakha, Fadhil Teknik Informatika ITB 2018</p>
+    </div>
+  </body>
+  <script src="scripts/event.js"></script>
+</html>
