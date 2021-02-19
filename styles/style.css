@@ -162,10 +162,12 @@ nav .hamburger:hover .hamburger-btn:hover {
     font-size: 6.25rem;
   }
 }
-@media (max-width: 448px) {
+@media (max-width: 1200px) {
   .main .landing .title {
-    text-align: center;
-    margin: 0 20px 60px;
+    margin-left: 5px;
+  }
+  .main .landing .title h1 {
+    font-size: 4rem;
   }
 }
 @media (max-width: 1024px) {
@@ -173,10 +175,19 @@ nav .hamburger:hover .hamburger-btn:hover {
     margin-left: 5px;
   }
   .main .landing .title h1 {
-    font-size: 3.75rem;
+    font-size: 3rem;
   }
 }
 @media (max-width: 768px) {
+  .main .landing .title h1 {
+    font-size: 3rem;
+  }
+}
+@media (max-width: 448px) {
+  .main .landing .title {
+    margin: 0 auto 50px;
+    text-align: center;
+  }
   .main .landing .title h1 {
     font-size: 3rem;
   }
@@ -217,12 +228,32 @@ nav .hamburger:hover .hamburger-btn:hover {
   font-size: 4rem;
   color: #1b6d90;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
+  .main .tab {
+    margin-left: 5px;
+  }
   .main .tab h1 {
-    font-size: 3.75rem;
+    font-size: 4rem;
+  }
+}
+@media (max-width: 1024px) {
+  .main .tab {
+    margin-left: 5px;
+  }
+  .main .tab h1 {
+    font-size: 3rem;
   }
 }
 @media (max-width: 768px) {
+  .main .tab h1 {
+    font-size: 3rem;
+  }
+}
+@media (max-width: 448px) {
+  .main .tab {
+    margin: 0 auto 50px;
+    text-align: center;
+  }
   .main .tab h1 {
     font-size: 3rem;
   }
@@ -239,6 +270,7 @@ nav .hamburger:hover .hamburger-btn:hover {
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: row;
+  margin-bottom: 80px;
 }
 .main .draw .container .toolbox {
   box-sizing: border-box;
@@ -269,7 +301,7 @@ nav .hamburger:hover .hamburger-btn:hover {
   box-sizing: border-box;
   text-align: center;
   width: 70%;
-  margin: 0 20px 80px;
+  margin: 0 20px 20px;
   height: 60vh;
   border: 10px solid;
   border-image-slice: 1;

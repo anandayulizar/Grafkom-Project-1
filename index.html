@@ -52,6 +52,9 @@
             <div class="draw tab" id="draw">
                 <h1>Start Drawing</h1>
                 <div class="container">
+                    <div class="canvas-container">
+                        <canvas id="glCanvas"></canvas>
+                    </div>
                     <div class="toolbox">
                         <input
                             type="radio"
@@ -77,16 +80,13 @@
                             onclick="getShapeOpt(this.value)"
                         />
                         <label for="polygon">Polygon</label><br />
-                        <select name="n-side" id="nSide" class="n-side hide">
-                          <option hidden>How many sides?</option>
-                          <option value=5>5</option>
-                          <option value=6>6</option>
-                          <option value=7>7</option>
-                          <option value=8>8</option>
+                        <select name="n-side" id="nSide" class="n-side hide" style='font-family: "Poppins";'>
+                            <option hidden>How many sides?</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
                         </select>
-                    </div>
-                    <div class="canvas-container">
-                        <canvas id="glCanvas"></canvas>
                     </div>
                 </div>
             </div>
