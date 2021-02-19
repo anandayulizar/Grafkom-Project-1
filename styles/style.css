@@ -233,10 +233,43 @@ nav .hamburger:hover .hamburger-btn:hover {
 .main .draw h1 {
   color: #5f3d9a;
 }
+.main .draw .container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.main .draw .container .toolbox {
+  box-sizing: border-box;
+  background: linear-gradient(-15deg, #2883ab, #a580e8);
+  min-width: 200px;
+  padding: 30px 40px;
+  margin: 0 20px 20px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.5), 4px 4px 6px 4px rgba(0, 0, 0, 0.1);
+}
+.main .draw .container .toolbox label {
+  color: white;
+}
+.main .draw .container .toolbox input {
+  margin: 10px 0;
+  margin-right: 5px;
+}
+.main .draw .container .toolbox .n-side {
+  width: 100%;
+  margin: 20px 0px;
+  background: white;
+  padding: 8px;
+  border-radius: 4px;
+  color: #5f3d9a;
+  font-weight: 500;
+}
 .main .draw .canvas-container {
+  box-sizing: border-box;
   text-align: center;
-  width: 90%;
-  margin: 0 auto 80px;
+  width: 70%;
+  margin: 0 20px 80px;
   height: 60vh;
   border: 10px solid;
   border-image-slice: 1;
@@ -244,6 +277,11 @@ nav .hamburger:hover .hamburger-btn:hover {
   border-image-source: linear-gradient(-45deg, #2883ab, #a580e8);
   position: relative;
   z-index: 3;
+}
+@media (max-width: 768px) {
+  .main .draw .canvas-container {
+    width: 100%;
+  }
 }
 .main .draw .canvas-container canvas {
   width: 100%;
@@ -291,6 +329,11 @@ nav .hamburger:hover .hamburger-btn:hover {
     left: -100% !important;
     opacity: 0 !important;
   }
+}
+
+.hide {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,67 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles/style.css" />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
-      integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
-      crossorigin="anonymous"
-      defer
-    ></script>
-    <title>Web GL Demo</title>
-  </head>
-  <body>
-    <nav id="navbar">
-      <div class="nav-brand">
-        <h2>WebGL Demo</h2>
-      </div>
-      <div class="nav-menu none" id="navMenu">
-        <a class="nav-item" onclick="showMenu()" href="#home">HOME</a>
-        <a class="nav-item" onclick="showMenu()" href="#help">HELP</a>
-        <a class="nav-item" onclick="showMenu()" href="#draw">CREATE SKETCH</a>
-      </div>
-      <a class="hamburger" id="hamburger" onclick="showMenu()">
-        <i class="fa fa-bars hamburger-btn"></i>
-      </a>
-    </nav>
-    <div class="main">
-      <div class="landing" id="home">
-        <img src="public/images/landing.png" alt="" />
-        <div class="title">
-          <h1>Create Your Sketch</h1>
-          <button onclick="getStarted()">Get Started</button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles/style.css" />
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+            integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+            crossorigin="anonymous"
+            defer
+        ></script>
+        <title>Web GL Demo</title>
+    </head>
+    <body>
+        <nav id="navbar">
+            <div class="nav-brand">
+                <h2>WebGL Demo</h2>
+            </div>
+            <div class="nav-menu none" id="navMenu">
+                <a class="nav-item" onclick="showMenu()" href="#home">HOME</a>
+                <a class="nav-item" onclick="showMenu()" href="#help">HELP</a>
+                <a class="nav-item" onclick="showMenu()" href="#draw"
+                    >CREATE SKETCH</a
+                >
+            </div>
+            <a class="hamburger" id="hamburger" onclick="showMenu()">
+                <i class="fa fa-bars hamburger-btn"></i>
+            </a>
+        </nav>
+        <div class="main">
+            <div class="landing" id="home">
+                <img src="public/images/landing.png" alt="" />
+                <div class="title">
+                    <h1>Create Your Sketch</h1>
+                    <button onclick="getStarted()">Get Started</button>
+                </div>
+            </div>
+            <div class="help tab" id="help">
+                <h1>Tutorial</h1>
+            </div>
+            <div class="draw tab" id="draw">
+                <h1>Start Drawing</h1>
+                <div class="container">
+                    <div class="toolbox">
+                        <input
+                            type="radio"
+                            id="square"
+                            name="type"
+                            value="square"
+                            onclick="getShapeOpt(this.value)"
+                        />
+                        <label for="square">Square</label><br />
+                        <input
+                            type="radio"
+                            id="triangle"
+                            name="type"
+                            value="triangle"
+                            onclick="getShapeOpt(this.value)"
+                        />
+                        <label for="triangle">Triangle</label><br />
+                        <input
+                            type="radio"
+                            id="polygon"
+                            name="type"
+                            value="polygon"
+                            onclick="getShapeOpt(this.value)"
+                        />
+                        <label for="polygon">Polygon</label><br />
+                        <select name="n-side" id="nSide" class="n-side hide">
+                          <option hidden>How many sides?</option>
+                          <option value=5>5</option>
+                          <option value=6>6</option>
+                          <option value=7>7</option>
+                          <option value=8>8</option>
+                        </select>
+                    </div>
+                    <div class="canvas-container">
+                        <canvas id="glCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="help tab" id="help">
-        <h1>Tutorial</h1>
-      </div>
-      <div class="draw tab" id="draw">
-        <h1>Start Drawing</h1>
-        <div class="canvas-container">
-          <canvas id="glCanvas"></canvas>
+        <div class="footer">
+            <h4>Tugas Besar Grafika Komputer</h4>
+            <p>&#169;Nanda, Rakha, Fadhil Teknik Informatika ITB 2018</p>
         </div>
-      </div>
-    </div>
-    <div class="footer">
-      <h4>Tugas Besar Grafika Komputer</h4>
-      <p>&#169;Nanda, Rakha, Fadhil Teknik Informatika ITB 2018</p>
-    </div>
-  </body>
-  <script src="scripts/event.js"></script>
-  <script src="scripts/shader.js"></script>
-  <script src="scripts/square.js"></script>
-  <script src="scripts/render.js"></script>
-  <script src="scripts/main.js"></script>
+    </body>
+    <script src="scripts/event.js"></script>
+    <script src="scripts/shader.js"></script>
+    <script src="scripts/square.js"></script>
+    <script src="scripts/render.js"></script>
+    <script src="scripts/main.js"></script>
 </html>

@@ -1,43 +1,47 @@
 function main() {
-  const canvas = document.querySelector("#glCanvas");
-  // Initialize the GL context
-  const gl = canvas.getContext("webgl");
+    const canvas = document.querySelector("#glCanvas");
+    // Initialize the GL context
+    const gl = canvas.getContext("webgl");
 
-  // Only continue if WebGL is available and working
-  if (gl === null) {
-    alert(
-      "Unable to initialize WebGL. Your browser or machine may not support it."
-    );
-    return;
-  }
+    // Only continue if WebGL is available and working
+    if (gl === null) {
+        alert(
+            "Unable to initialize WebGL. Your browser or machine may not support it."
+        );
+        return;
+    }
 
-  // Set clear color to black, fully opaque
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  // Clear the color buffer with specified clear color
-  gl.clear(gl.COLOR_BUFFER_BIT);
+    // Set clear color to black, fully opaque
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    // Clear the color buffer with specified clear color
+    gl.clear(gl.COLOR_BUFFER_BIT);
 
+    // TEEESSSSS
+    const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
 
-  // TEEESSSSS
-  const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
+    const programInfo = {
+        program: shaderProgram,
+        attribLocations: {
+            vertexPosition: gl.getAttribLocation(
+                shaderProgram,
+                "aVertexPosition"
+            ),
+        },
+        uniformLocations: {
+            projectionMatrix: gl.getUniformLocation(
+                shaderProgram,
+                "uProjectionMatrix"
+            ),
+            modelViewMatrix: gl.getUniformLocation(
+                shaderProgram,
+                "uModelViewMatrix"
+            ),
+        },
+    };
 
-  const programInfo = {
-    program: shaderProgram,
-    attribLocations: {
-      vertexPosition: gl.getAttribLocation(shaderProgram, "aVertexPosition"),
-    },
-    uniformLocations: {
-      projectionMatrix: gl.getUniformLocation(
-        shaderProgram,
-        "uProjectionMatrix"
-      ),
-      modelViewMatrix: gl.getUniformLocation(shaderProgram, "uModelViewMatrix"),
-    },
-  };
+    const buffers = initBuffers(gl);
 
-  console.log(programInfo);
-  const buffers = initBuffers(gl);
-
-  drawScene(gl, programInfo, buffers);
+    drawScene(gl, programInfo, buffers);
 }
 
 window.onload = main;
