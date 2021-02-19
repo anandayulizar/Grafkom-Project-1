@@ -259,6 +259,7 @@ nav .hamburger:hover .hamburger-btn:hover {
   }
 }
 .main .draw {
+  text-align: center;
   padding-bottom: 80px;
 }
 .main .draw h1 {
@@ -280,13 +281,43 @@ nav .hamburger:hover .hamburger-btn:hover {
   margin: 0 20px 20px;
   border-radius: 4px;
   box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.5), 4px 4px 6px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  position: relative;
 }
 .main .draw .container .toolbox label {
   color: white;
 }
 .main .draw .container .toolbox input {
   margin: 10px 0;
-  margin-right: 5px;
+  margin-right: 20px;
+  cursor: pointer;
+  position: relative;
+}
+.main .draw .container .toolbox input[type=radio]:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+.main .draw .container .toolbox input[type=radio]:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #ffa500;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
 }
 .main .draw .container .toolbox .n-side {
   width: 100%;
