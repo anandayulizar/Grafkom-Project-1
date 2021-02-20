@@ -1,43 +1,31 @@
-function main() {
-  const canvas = document.querySelector("#glCanvas");
-  // Initialize the GL context
-  const gl = canvas.getContext("webgl");
-
-  // Only continue if WebGL is available and working
-  if (gl === null) {
-    alert(
-      "Unable to initialize WebGL. Your browser or machine may not support it."
-    );
+function main(inputData) {
+  // Get A WebGL context
+  var canvas = document.querySelector("#glCanvas");
+  var gl = canvas.getContext("webgl");
+  if (!gl) {
     return;
   }
 
-  // Set clear color to black, fully opaque
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  // Clear the color buffer with specified clear color
-  gl.clear(gl.COLOR_BUFFER_BIT);
+  // Create a shader progra,
+  var program = createProgram(gl);
 
+  // Convert clip space (-1 <-> 1) to pixels
 
-  // TEEESSSSS
-  const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
+  const displayWidth = canvas.clientWidth;
+  const displayHeight = canvas.clientHeight;
 
-  const programInfo = {
-    program: shaderProgram,
-    attribLocations: {
-      vertexPosition: gl.getAttribLocation(shaderProgram, "aVertexPosition"),
-    },
-    uniformLocations: {
-      projectionMatrix: gl.getUniformLocation(
-        shaderProgram,
-        "uProjectionMatrix"
-      ),
-      modelViewMatrix: gl.getUniformLocation(shaderProgram, "uModelViewMatrix"),
-    },
-  };
+  // Check if the canvas is not the same size
+  const needResize = canvas.width !== displayWidth ||
+    canvas.height !== displayHeight;
 
-  console.log(programInfo);
-  const buffers = initBuffers(gl);
+  if (needResize) {
+    canvas.width = displayWidth;
+    canvas.height = displayHeight;
+  }
 
-  drawScene(gl, programInfo, buffers);
+  gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+  drawScene(gl, program, inputData);
 }
 
-window.onload = main;
+main([]);

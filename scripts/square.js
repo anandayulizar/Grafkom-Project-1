@@ -1,32 +1,22 @@
-function initBuffers(gl) {
+function drawSquare(x, y, length, gl) {
+  // generate square's points
+  let t1 = [x, y];
+  let t2 = [x, y + length];
+  let t3 = [x + length, y];
+  let t4 = [x + length, y + length];
 
-    // Create a buffer for the square's positions.
-  
-    const positionBuffer = gl.createBuffer();
-  
-    // Select the positionBuffer as the one to apply buffer
-    // operations to from here out.
-  
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-  
-    // Now create an array of positions for the square.
-  
-    const positions = [
-      -1.0,  1.0,
-       1.0,  1.0,
-      -1.0, -1.0,
-       1.0, -1.0,
-    ];
-  
-    // Now pass the list of positions into WebGL to build the
-    // shape. We do this by creating a Float32Array from the
-    // JavaScript array, then use it to fill the current buffer.
-  
-    gl.bufferData(gl.ARRAY_BUFFER,
-                  new Float32Array(positions),
-                  gl.STATIC_DRAW);
-  
-    return {
-      position: positionBuffer,
-    };
-  }
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+    ...t1,
+    ...t2,
+    ...t3,
+    ...t3,
+    ...t2,
+    ...t4,
+  ]), gl.STATIC_DRAW);
+
+  // draw square on canvas
+  var primitiveType = gl.TRIANGLES;
+  var offset = 0;
+  var count = 6;
+  gl.drawArrays(primitiveType, offset, count);
+}
