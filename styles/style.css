@@ -75,6 +75,13 @@ nav .nav-menu a {
 nav .nav-menu a:hover {
   transform: scale(1.2);
 }
+
+.form-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 768px) {
   nav .nav-menu {
     top: 64px;
@@ -162,10 +169,12 @@ nav .hamburger:hover .hamburger-btn:hover {
     font-size: 6.25rem;
   }
 }
-@media (max-width: 448px) {
+@media (max-width: 1200px) {
   .main .landing .title {
-    text-align: center;
-    margin: 0 20px 60px;
+    margin-left: 5px;
+  }
+  .main .landing .title h1 {
+    font-size: 4rem;
   }
 }
 @media (max-width: 1024px) {
@@ -173,10 +182,19 @@ nav .hamburger:hover .hamburger-btn:hover {
     margin-left: 5px;
   }
   .main .landing .title h1 {
-    font-size: 3.75rem;
+    font-size: 3rem;
   }
 }
 @media (max-width: 768px) {
+  .main .landing .title h1 {
+    font-size: 3rem;
+  }
+}
+@media (max-width: 448px) {
+  .main .landing .title {
+    margin: 0 auto 50px;
+    text-align: center;
+  }
   .main .landing .title h1 {
     font-size: 3rem;
   }
@@ -217,9 +235,20 @@ nav .hamburger:hover .hamburger-btn:hover {
   font-size: 4rem;
   color: #1b6d90;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
+  .main .tab {
+    margin-left: 5px;
+  }
   .main .tab h1 {
-    font-size: 3.75rem;
+    font-size: 4rem;
+  }
+}
+@media (max-width: 1024px) {
+  .main .tab {
+    margin-left: 5px;
+  }
+  .main .tab h1 {
+    font-size: 3rem;
   }
 }
 @media (max-width: 768px) {
@@ -227,16 +256,90 @@ nav .hamburger:hover .hamburger-btn:hover {
     font-size: 3rem;
   }
 }
+@media (max-width: 448px) {
+  .main .tab {
+    margin: 0 auto 50px;
+    text-align: center;
+  }
+  .main .tab h1 {
+    font-size: 3rem;
+  }
+}
 .main .draw {
+  text-align: center;
   padding-bottom: 80px;
 }
 .main .draw h1 {
   color: #5f3d9a;
 }
+.main .draw .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-bottom: 80px;
+}
+.main .draw .container .toolbox {
+  box-sizing: border-box;
+  background: linear-gradient(-15deg, #2883ab, #a580e8);
+  min-width: 200px;
+  padding: 30px 40px;
+  margin: 0 20px 20px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.5), 4px 4px 6px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  position: relative;
+}
+.main .draw .container .toolbox label {
+  color: white;
+}
+.main .draw .container .toolbox input {
+  margin: 10px 0;
+  margin-right: 20px;
+  cursor: pointer;
+  position: relative;
+}
+.main .draw .container .toolbox input[type=radio]:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+.main .draw .container .toolbox input[type=radio]:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #ffa500;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+.main .draw .container .toolbox .n-side {
+  width: 100%;
+  margin: 20px 0px;
+  background: white;
+  padding: 8px;
+  border-radius: 4px;
+  color: #5f3d9a;
+  font-weight: 500;
+}
 .main .draw .canvas-container {
+  box-sizing: border-box;
   text-align: center;
-  width: 90%;
-  margin: 0 auto 80px;
+  width: 70%;
+  margin: 0 20px 20px;
   height: 60vh;
   border: 10px solid;
   border-image-slice: 1;
@@ -244,6 +347,11 @@ nav .hamburger:hover .hamburger-btn:hover {
   border-image-source: linear-gradient(-45deg, #2883ab, #a580e8);
   position: relative;
   z-index: 3;
+}
+@media (max-width: 768px) {
+  .main .draw .canvas-container {
+    width: 100%;
+  }
 }
 .main .draw .canvas-container canvas {
   width: 100%;
@@ -291,6 +399,11 @@ nav .hamburger:hover .hamburger-btn:hover {
     left: -100% !important;
     opacity: 0 !important;
   }
+}
+
+.hide {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /*# sourceMappingURL=style.css.map */

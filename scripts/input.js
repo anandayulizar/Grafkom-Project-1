@@ -9,6 +9,21 @@ addButton.addEventListener('click', () => {
   let newForm = document.createElement('form');
 
   newForm.innerHTML += `
+          <div class="toolbox">
+            <input type="radio" id="square" name="shape" value="square" onclick="getShapeOpt(this.value)" />
+            <label for="square">Square</label><br />
+            <input type="radio" id="triangle" name="shape" value="triangle" onclick="getShapeOpt(this.value)" />
+            <label for="triangle">Triangle</label><br />
+            <input type="radio" id="polygon" name="shape" value="polygon" onclick="getShapeOpt(this.value)" />
+            <label for="polygon">Polygon</label><br />
+            <select name="n-side" id="nSide" class="n-side" style='font-family: "Poppins";'>
+              <option hidden>How many sides?</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+        
             <div class="input-container">
               <label for="x">X</label>
               <input required type="text" class="draw-input" name="x">
@@ -19,20 +34,12 @@ addButton.addEventListener('click', () => {
             </div>
 
             <div class="input-container">
-              <label for="shape">Shape</label>
-              <select name="shape" id="">
-                <option value="line">Line</option>
-                <option value="square">Square</option>
-                <option value="polygon">Polygon</option>
-              </select>
-            </div>
-
-            <div class="input-container">
               <label for="length">Length</label>
               <input required type="text" class="draw-input" name="length">
             </div>
 
             <button type="submit">Draw Item</button>   
+          </div>
     `
 
   formsContainer.appendChild(newForm);
