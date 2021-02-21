@@ -75,13 +75,6 @@ nav .nav-menu a {
 nav .nav-menu a:hover {
   transform: scale(1.2);
 }
-
-.form-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
 @media (max-width: 768px) {
   nav .nav-menu {
     top: 64px;
@@ -274,16 +267,15 @@ nav .hamburger:hover .hamburger-btn:hover {
 }
 .main .draw .container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
-  flex-direction: column;
+  flex-direction: row;
   margin-bottom: 80px;
 }
 .main .draw .container .toolbox {
   box-sizing: border-box;
   background: linear-gradient(-15deg, #2883ab, #a580e8);
-  min-width: 200px;
   padding: 30px 40px;
   margin: 0 20px 20px;
   border-radius: 4px;
@@ -291,14 +283,20 @@ nav .hamburger:hover .hamburger-btn:hover {
   text-align: left;
   position: relative;
 }
+.main .draw .container .toolbox .btn-container {
+  text-align: center;
+}
 .main .draw .container .toolbox label {
   color: white;
 }
 .main .draw .container .toolbox input {
   margin: 10px 0;
-  margin-right: 20px;
   cursor: pointer;
   position: relative;
+}
+.main .draw .container .toolbox input[type=radio] {
+  margin-right: 15px;
+  width: auto !important;
 }
 .main .draw .container .toolbox input[type=radio]:after {
   width: 15px;
@@ -328,7 +326,7 @@ nav .hamburger:hover .hamburger-btn:hover {
 }
 .main .draw .container .toolbox .n-side {
   width: 100%;
-  margin: 20px 0px;
+  margin-bottom: 40px;
   background: white;
   padding: 8px;
   border-radius: 4px;
@@ -404,6 +402,34 @@ nav .hamburger:hover .hamburger-btn:hover {
 .hide {
   opacity: 0;
   pointer-events: none;
+}
+
+.top {
+  box-sizing: border-box;
+  width: 100% !important;
+}
+
+.bottom {
+  margin: 0 !important;
+}
+
+input[type=color] {
+  margin-top: 0 !important;
+  margin-bottom: 20px !important;
+  width: 97% !important;
+}
+
+.coordinate {
+  display: flex;
+  align-items: center;
+}
+
+.mr {
+  margin-right: 15px !important;
+}
+
+.coor {
+  width: 70px !important;
 }
 
 /*# sourceMappingURL=style.css.map */

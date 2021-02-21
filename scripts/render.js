@@ -38,7 +38,11 @@ function drawScene(gl, program, inputData) {
     positionAttributeLocation, size, type, normalize, stride, offset);
 
   inputData.forEach(data => {
-    // Shape validation will goes here 
+    //Change color
+    var fColorLocation = gl.getUniformLocation(program, "fColor");
+
+    // at render time
+    gl.uniform4f(fColorLocation, data.color.r, data.color.g, data.color.b, 1);
     if (data.shape == 'square') {
       console.log('Is a square');
     } else {

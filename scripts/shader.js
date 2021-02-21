@@ -17,42 +17,43 @@ const vsSource = `
 
   gl_Position = vec4(clipSpace, 0, 1);
 }
-`
+`;
 
 const fsSource = `
     precision mediump float;
+    uniform vec4 fColor;
 
-  void main() {
-    gl_FragColor = vec4(1, 0, 0.5, 1);
-  }
-`
+    void main() {
+      gl_FragColor = fColor;
+    }
+  `;
 
 function createShader(gl, type, source) {
-  var shader = gl.createShader(type);
-  gl.shaderSource(shader, source);
-  gl.compileShader(shader);
-  var success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
-  if (success) {
-    return shader;
-  }
+    var shader = gl.createShader(type);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    var success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+    if (success) {
+        return shader;
+    }
 
-  console.log(gl.getShaderInfoLog(shader));
-  gl.deleteShader(shader);
+    console.log(gl.getShaderInfoLog(shader));
+    gl.deleteShader(shader);
 }
 
 function createProgram(gl) {
-  // create GLSL shaders, upload the GLSL source, compile the shaders
-  var vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
-  var fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
-  var program = gl.createProgram();
-  gl.attachShader(program, vertexShader);
-  gl.attachShader(program, fragmentShader);
-  gl.linkProgram(program);
-  var success = gl.getProgramParameter(program, gl.LINK_STATUS);
-  if (success) {
-    return program;
-  }
+    // create GLSL shaders, upload the GLSL source, compile the shaders
+    var vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
+    var fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+    var program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+    var success = gl.getProgramParameter(program, gl.LINK_STATUS);
+    if (success) {
+        return program;
+    }
 
-  console.log(gl.getProgramInfoLog(program));
-  gl.deleteProgram(program);
+    console.log(gl.getProgramInfoLog(program));
+    gl.deleteProgram(program);
 }

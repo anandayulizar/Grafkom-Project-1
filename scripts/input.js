@@ -3,58 +3,12 @@ const formsContainer = document.querySelector('.form-container');
 const showInputContainer = document.querySelector('.show-input-container');
 const firstForm = document.querySelector('form');
 
-const inputData = [];
+let inputData = [];
 
-addButton.addEventListener('click', () => {
-  let newForm = document.createElement('form');
+firstForm.addEventListener("submit", e => onSubmit(e));
 
-  newForm.innerHTML += `
-          <div class="toolbox">
-            <input type="radio" id="square" name="shape" value="square" onclick="getShapeOpt(this.value)" />
-            <label for="square">Square</label><br />
-            <input type="radio" id="triangle" name="shape" value="triangle" onclick="getShapeOpt(this.value)" />
-            <label for="triangle">Triangle</label><br />
-            <input type="radio" id="polygon" name="shape" value="polygon" onclick="getShapeOpt(this.value)" />
-            <label for="polygon">Polygon</label><br />
-            <select name="n-side" id="nSide" class="n-side" style='font-family: "Poppins";'>
-              <option hidden>How many sides?</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-            </select>
-        
-            <div class="input-container">
-              <label for="x">X</label>
-              <input required type="text" class="draw-input" name="x">
-            </div>
-            <div class="input-container">
-              <label for="y">Y</label>
-              <input required type="text" class="draw-input" name="y">
-            </div>
 
-            <div class="input-container">
-              <label for="length">Length</label>
-              <input required type="text" class="draw-input" name="length">
-            </div>
-
-            <button type="submit">Draw Item</button>   
-          </div>
-    `
-
-  formsContainer.appendChild(newForm);
-  inputData.push({});
-  let idx = whichChild(newForm);
-  newForm.addEventListener('submit', (e) => onSubmit(e, idx - 1));
-})
-
-function whichChild(elem) {
-  var i = 0;
-  while ((elem = elem.previousSibling) != null) ++i;
-  return i;
-}
-
-const onSubmit = (e, idx) => {
+const onSubmit = e => {
   e.preventDefault();
   let formData = new FormData(e.target);
   let itemObj = {};
@@ -63,8 +17,20 @@ const onSubmit = (e, idx) => {
       pair[1] = parseInt(pair[1]);
     }
     itemObj[pair[0]] = pair[1];
+    itemObj["color"] = hexToRgb(document.getElementById("color").value);
   }
 
-  inputData[idx] = itemObj;
+  inputData.push(itemObj);
   main(inputData);
 }
+
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16)/255,
+    g: parseInt(result[2], 16)/255,
+    b: parseInt(result[3], 16)/255
+  } : null;
+}
+
+console.log(inputData);

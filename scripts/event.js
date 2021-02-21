@@ -30,3 +30,11 @@ const getShapeOpt = value => {
         nSides.classList.add("hide")
     }
 }
+
+let drawnShapes = inputData.map(item => {
+    return (
+        `
+        <input type="radio" />
+        `
+    )
+})
