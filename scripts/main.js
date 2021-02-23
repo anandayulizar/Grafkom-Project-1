@@ -102,6 +102,22 @@ const isInObject = (object) => {
         } else {
             return false;
         }
+    } else if (object.shape == 'line') {
+        let coordinatePicked = false;
+        for (let i = 0; i < 4; i += 2) {
+            if (globalState.mouse.x > object.coordinates[i] - 10 &&
+                globalState.mouse.x < object.coordinates[i] + 10 &&
+                globalState.mouse.y > object.coordinates[i + 1] - 10 &&
+                globalState.mouse.y < object.coordinates[i + 1] + 10) {
+                globalState.pickedCoordCount = i;
+                coordinatePicked = true;
+            }
+        }
+        if (!coordinatePicked) {
+            globalState.pickedCoordCount = -1;
+        }
+
+        return coordinatePicked;
     }
 }
 

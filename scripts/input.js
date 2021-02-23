@@ -35,17 +35,11 @@ const onUpdate = e => {
   if (globalState.pickedIdx < 0) {
     return;
   }
-  let formData = new FormData(e.target);
   let itemObj = {};
-  for (let pair of formData.entries()) {
-    if (pair[0] != 'shape') {
-      pair[1] = parseInt(pair[1]);
-    }
-    itemObj[pair[0]] = pair[1];
-    itemObj["color"] = hexToRgb(document.updateForm.color.value);
-  }
+  itemObj["color"] = hexToRgb(document.updateForm.color.value);
 
   console.log(inputData[globalState.pickedIdx])
+  console.log(globalState.pickedIdx)
 
   inputData[globalState.pickedIdx] = {
     ...itemObj,
@@ -62,6 +56,9 @@ const getObjData = (data) => {
     coordinates.push(data.x + data.length, data.y);
     coordinates.push(data.x, data.y + data.length);
     coordinates.push(data.x + data.length, data.y + data.length);
+  } else if (data.shape == 'line') {
+    coordinates.push(data.x, data.y);
+    coordinates.push(data.x + data.length, data.y);
   }
 
   return coordinates;
@@ -75,5 +72,3 @@ function hexToRgb(hex) {
     b: parseInt(result[3], 16) / 255
   } : null;
 }
-
-console.log(inputData);

@@ -47,7 +47,12 @@ function drawScene(gl, program, inputData) {
     // } else {
     //   console.log('Is not a square')
     // }
-    // Temporary because there is only a square
-    drawSquare(data, gl, fColorLocation);
+
+    if (data.shape == 'line') {
+      drawLine(data, gl, fColorLocation);
+    } else {
+      drawSquare(data, gl, fColorLocation);
+    }
+
   })
 }

@@ -47,10 +47,10 @@
         </div>
         <div class="toolbox">
           <form class="new-form" name="newForm">
+            <input type="radio" id="line" name="shape" value="line" onclick="getShapeOpt(this.value)" />
+            <label for="line">Line</label><br />
             <input type="radio" id="square" name="shape" value="square" onclick="getShapeOpt(this.value)" />
             <label for="square">Square</label><br />
-            <input type="radio" id="triangle" name="shape" value="triangle" onclick="getShapeOpt(this.value)" />
-            <label for="triangle">Triangle</label><br />
             <input type="radio" id="polygon" name="shape" value="polygon" onclick="getShapeOpt(this.value)" />
             <label for="polygon">Polygon</label><br /><br />
 
@@ -118,6 +118,7 @@
 <script src="scripts/input.js"></script>
 <script src="scripts/shader.js"></script>
 <script src="scripts/square.js"></script>
+<script src="scripts/line.js"></script>
 <script src="scripts/render.js"></script>
 <script src="scripts/main.js"></script>
 <script src="scripts/event.js"></script>
