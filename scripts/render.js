@@ -1,5 +1,4 @@
 function drawScene(gl, program, inputData) {
-  console.log(inputData)
   // Clear the canvas
   gl.clearColor(0, 0, 0, 0);
   gl.clear(gl.COLOR_BUFFER_BIT);
@@ -43,11 +42,11 @@ function drawScene(gl, program, inputData) {
 
     // at render time
     gl.uniform4f(fColorLocation, data.color.r, data.color.g, data.color.b, 1);
-    if (data.shape == 'square') {
-      console.log('Is a square');
-    } else {
-      console.log('Is not a square')
-    }
+    // if (data.shape == 'square') {
+    //   console.log('Is a square');
+    // } else {
+    //   console.log('Is not a square')
+    // }
     // Temporary because there is only a square
     drawSquare(data, gl, fColorLocation);
   })

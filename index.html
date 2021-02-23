@@ -93,39 +93,10 @@
         <div class="toolbox">
           <h4></h4>
           <form class="update-form" name="updateForm">
-            <input type="radio" id="square" name="shape" value="square" onclick="getShapeOpt(this.value)" />
-            <label for="square">Square</label><br />
-            <input type="radio" id="triangle" name="shape" value="triangle" onclick="getShapeOpt(this.value)" />
-            <label for="triangle">Triangle</label><br />
-            <input type="radio" id="polygon" name="shape" value="polygon" onclick="getShapeOpt(this.value)" />
-            <label for="polygon">Polygon</label><br /><br />
-
-            <div class="coordinate">
-              <div class="input-container">
-                <label for="x">X:</label>
-                <input required type="text" class="draw-input mr coor" name="x">
-              </div>
-              <div class="input-container">
-                <label for="y">Y:</label>
-                <input required type="text" class="draw-input coor" name="y">
-              </div>
-            </div>
-
-            <div class="input-container">
-              <label>Length:</label><br />
-              <input required type="text" class="draw-input top" name="length">
-            </div>
             <div class="input-container">
               <label>Color:</label><br />
               <input type="color" class="draw-input" name="color" id="color">
             </div>
-            <select name="n-side hide" id="nSide" class="n-side" style='font-family: "Poppins";'>
-              <option hidden>How many sides?</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-            </select>
             <div class="btn-container">
               <button type="submit">Update Item</button>
             </div>

@@ -24,7 +24,7 @@ const onSubmit = e => {
   }
 
   itemObj["coordinates"] = getObjData(itemObj);
-  itemObj["id"] = itemObj.length;
+  itemObj["id"] = inputData.length;
 
   inputData.push(itemObj);
   main(inputData);
@@ -32,10 +32,9 @@ const onSubmit = e => {
 
 const onUpdate = e => {
   e.preventDefault();
-  if (appState.pickedIdx < 0) {
+  if (globalState.pickedIdx < 0) {
     return;
   }
-  console.log(appState)
   let formData = new FormData(e.target);
   let itemObj = {};
   for (let pair of formData.entries()) {
@@ -46,10 +45,12 @@ const onUpdate = e => {
     itemObj["color"] = hexToRgb(document.updateForm.color.value);
   }
 
-  itemObj["coordinates"] = getObjData(itemObj);
-  inputData[appState.pickedIdx] = {
+  console.log(inputData[globalState.pickedIdx])
+
+  inputData[globalState.pickedIdx] = {
     ...itemObj,
-    id: appState.pickedIdx + 1
+    id: globalState.pickedIdx,
+    coordinates: inputData[globalState.pickedIdx].coordinates
   }
   main(inputData);
 }

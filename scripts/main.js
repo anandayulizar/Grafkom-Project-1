@@ -1,4 +1,4 @@
-let appState = {
+let globalState = {
     mouse: {
         x: 0,
         y: 0,
@@ -6,7 +6,8 @@ let appState = {
     pickedIdx: -1,
     pickedCoordCount: -1,
 }
-function main(inputData) {
+
+function main() {
     // Get A WebGL context
     var canvas = document.querySelector("#glCanvas");
     var gl = canvas.getContext("webgl");
@@ -41,28 +42,30 @@ function main(inputData) {
             x: event.clientX - bound.left,
             y: canvas.height - (event.clientY - bound.top)
         }
-        appState.mouse = res
+        globalState.mouse = res
 
-        pickObject(inputData);
+        pickObject();
     }, false);
 
     canvas.addEventListener('mouseup', (event) => {
         console.log('mouseup');
         const bound = canvas.getBoundingClientRect()
-        if (appState.pickedIdx != -1) {
+        if (globalState.pickedIdx != -1 && globalState.pickedCoordCount != -1) {
             x = event.clientX - bound.left;
             y = canvas.height - (event.clientY - bound.top);
+            console.log(inputData)
+            console.log(globalState.pickedIdx)
 
-            inputData[appState.pickedIdx].coordinates[appState.pickedCoordCount] = x;
-            inputData[appState.pickedIdx].coordinates[appState.pickedCoordCount + 1] = y;
+            inputData[globalState.pickedIdx].coordinates[globalState.pickedCoordCount] = x;
+            inputData[globalState.pickedIdx].coordinates[globalState.pickedCoordCount + 1] = y;
 
-            main(inputData);
+            main();
         }
-        appState.pickedIdx = -1;
+        globalState.pickedCoordCount = -1;
     }, false);
 }
 
-const pickObject = (inputData) => {
+const pickObject = () => {
     console.log('pick object');
 
     let pickedArr = inputData.filter(data => {
@@ -70,27 +73,30 @@ const pickObject = (inputData) => {
     });
 
     if (pickedArr.length && pickedArr.length > 0) {
-        appState.pickedIdx = pickedArr[0].id - 1;
-        document.updateForm.x.value = pickedArr[0].x;
-        document.updateForm.y.value = pickedArr[0].y;
-        document.updateForm.shape.value = pickedArr[0].shape;
-        document.updateForm.length.value = pickedArr[0].length;
+        globalState.pickedIdx = pickedArr[0].id;
+    } else {
+        globalState.pickedIdx = -1;
     }
 }
 
 const isInObject = (object) => {
     if (object.shape == 'square') {
-        if (appState.mouse.x > object.coordinates[0] - 10 &&
-            appState.mouse.x < object.coordinates[6] + object.length + 10 &&
-            appState.mouse.y > object.coordinates[1] - 10 &&
-            appState.mouse.y < object.coordinates[7] + object.length + 10) {
+        if (globalState.mouse.x > object.coordinates[0] - 10 &&
+            globalState.mouse.x < object.coordinates[6] + object.length + 10 &&
+            globalState.mouse.y > object.coordinates[1] - 10 &&
+            globalState.mouse.y < object.coordinates[7] + object.length + 10) {
+            let coordinatePicked = false;
             for (let i = 0; i < 8; i += 2) {
-                if (appState.mouse.x > object.coordinates[i] - 10 &&
-                    appState.mouse.x < object.coordinates[i] + 10 &&
-                    appState.mouse.y > object.coordinates[i + 1] - 10 &&
-                    appState.mouse.y < object.coordinates[i + 1] + 10) {
-                    appState.pickedCoordCount = i;
+                if (globalState.mouse.x > object.coordinates[i] - 10 &&
+                    globalState.mouse.x < object.coordinates[i] + 10 &&
+                    globalState.mouse.y > object.coordinates[i + 1] - 10 &&
+                    globalState.mouse.y < object.coordinates[i + 1] + 10) {
+                    globalState.pickedCoordCount = i;
+                    coordinatePicked = true;
                 }
+            }
+            if (!coordinatePicked) {
+                globalState.pickedCoordCount = -1;
             }
             return true;
         } else {
@@ -99,21 +105,23 @@ const isInObject = (object) => {
     }
 }
 
-main([{
-    x: 100,
-    y: 100,
-    id: 1,
-    color: {
-        r: 0,
-        g: 0,
-        b: 0
-    },
-    shape: 'square',
-    length: 100,
-    coordinates: [
-        100, 100,
-        200, 100,
-        100, 200,
-        200, 200
-    ]
-}]);
+main([])
+
+// main([{
+//     x: 100,
+//     y: 100,
+//     id: 1,
+//     color: {
+//         r: 0,
+//         g: 0,
+//         b: 0
+//     },
+//     shape: 'square',
+//     length: 100,
+//     coordinates: [
+//         100, 100,
+//         200, 100,
+//         100, 200,
+//         200, 200
+//     ]
+// }]);
