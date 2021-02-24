@@ -74,7 +74,7 @@
               <label>Color:</label><br />
               <input type="color" class="draw-input" name="color" id="color">
             </div>
-            <select name="side" id="nSide" class="n-side" style='font-family: "Poppins";'>
+            <select name="side" id="nSide" class="n-side hide" style='font-family: "Poppins";'>
               <option hidden>How many sides?</option>
               <option value="5">5</option>
               <option value="6">6</option>
@@ -86,6 +86,8 @@
               <button type="button" id="deleteButton">Delete Item</button>
               <input type="file" name="file" id="file" onchange="importFile()">
               <label for="file" class="file"><span>Import File</span></label>
+              <button type="button" id="saveButton" onclick="promptToSave()">Save Item</button>
+              <div id="fileName"></div>
             </div>
           </form>
         </div>
@@ -101,7 +103,6 @@
               <button type="submit">Update Item</button>
             </div>
           </form>
-          <div id="fileName"></div>
         </div>
       </div>
 

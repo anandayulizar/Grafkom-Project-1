@@ -34,7 +34,18 @@ deleteButton.addEventListener('click', () => {
   main();
 })
 
-var saveData = (function () {
+const promptToSave = async () => {
+  let fileName = prompt(
+    "Do you want to save the data? \n\n If yes give your filename then press 'OK', otherwise press 'Cancel'"
+  );
+
+  if (fileName) {
+    let file = `${fileName}.json`;
+    await saveData(inputData, file);
+  }
+}
+
+const saveData = (function () {
   var a = document.createElement("a");
   // document.body.appendChild(a);
   // a.style = "display: none";
@@ -49,9 +60,11 @@ var saveData = (function () {
   };
 })();
 
-const onSubmit = async (e) => {
+const onSubmit = e => {
   e.preventDefault();
+
   document.getElementById("fileName").textContent = '';
+
   let formData = new FormData(e.target);
   let itemObj = {};
   for (let pair of formData.entries()) {
@@ -68,15 +81,6 @@ const onSubmit = async (e) => {
 
   inputData.push(itemObj);
   main(inputData);
-
-  let fileName = prompt(
-    "Do you want to save the data? \n\n If yes give your filename then press 'OK', otherwise press 'Cancel'"
-  );
-
-  if (fileName) {
-    let file = `${fileName}.json`;
-    await saveData(itemObj, file);
-  }
 }
 
 const onUpdate = e => {
@@ -204,10 +208,13 @@ const importFile = () => {
     reader.readAsText(uploaded, "UTF-8");
 
     reader.onload = function (e) {
-      itemObj = JSON.parse(e.target.result);
-      inputData.push(itemObj);
+      let uploadedObj = JSON.parse(e.target.result);
+      console.log(uploadedObj)
+
+      uploadedObj.forEach(item => inputData.push(item));
       main(inputData);
     };
+    
     reader.onerror = function (e) {
       alert("Error importing file!");
     };

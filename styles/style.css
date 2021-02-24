@@ -14,7 +14,7 @@ input,
 div,
 button,
 a,
-nav {
+nav, .file {
   font-family: "Poppins", sans-serif;
   transition: all 0.4s;
 }
@@ -270,8 +270,10 @@ nav .hamburger:hover .hamburger-btn:hover {
 }
 .main .draw .container {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 40px 10px;
 }
+
 .main .draw .container .toolbox {
   box-sizing: border-box;
   background: linear-gradient(-15deg, #2883ab, #a580e8);
@@ -292,7 +294,7 @@ nav .hamburger:hover .hamburger-btn:hover {
   text-align: center;
 }
 .main .draw .container .toolbox .btn-container button, .main .draw .container .toolbox .btn-container .file {
-  margin: 0 5px;
+  margin: 10px 5px;
   padding: 5px;
   display: inline-block;
   width: 100px;
@@ -312,7 +314,7 @@ nav .hamburger:hover .hamburger-btn:hover {
   color: white;
 }
 .main .draw .container .toolbox input {
-  margin: 2.5px 0;
+  margin: 5px 0;
   cursor: pointer;
   position: relative;
 }
@@ -353,6 +355,7 @@ nav .hamburger:hover .hamburger-btn:hover {
   border-radius: 4px;
   color: #5f3d9a;
   font-weight: 500;
+  margin-bottom: 20px;
 }
 
 .main .draw .container #fileName {
@@ -482,4 +485,12 @@ input[type=file] {
   display: none;
 }
 
+.input-container {
+  margin-bottom: 10px;
+}
+
+button:hover, .file:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
 /*# sourceMappingURL=style.css.map */
