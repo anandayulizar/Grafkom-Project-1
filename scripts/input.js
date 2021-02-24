@@ -29,9 +29,24 @@ let inputData = [];
 newForm.addEventListener("submit", e => onSubmit(e));
 updateForm.addEventListener("submit", e => onUpdate(e));
 
+var saveData = (function () {
+  var a = document.createElement("a");
+  // document.body.appendChild(a);
+  // a.style = "display: none";
+  return function (data, fileName) {
+    var json = JSON.stringify(data),
+      blob = new Blob([json], { type: "octet/stream" }),
+      url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+})();
 
-const onSubmit = e => {
+const onSubmit = async (e) => {
   e.preventDefault();
+  document.getElementById("fileName").textContent = '';
   let formData = new FormData(e.target);
   let itemObj = {};
   for (let pair of formData.entries()) {
@@ -48,6 +63,15 @@ const onSubmit = e => {
 
   inputData.push(itemObj);
   main(inputData);
+
+  let fileName = prompt(
+    "Do you want to save the data? \n\n If yes give your filename then press 'OK', otherwise press 'Cancel'"
+  );
+
+  if (fileName) {
+    let file = `${fileName}.json`;
+    await saveData(itemObj, file);
+  }
 }
 
 const onUpdate = e => {
@@ -83,38 +107,28 @@ const getObjCoordinates = (data) => {
       let y2 = data.length * Math.sin(rad(90 - (tetha / 2)));
 
       coordinates = [
-        data.x, data.y + data.length,
-        data.x + x1, data.y + y1,
         data.x + x1, data.y + y1,
         data.x + x2, data.y - y2,
-        data.x + x2, data.y - y2,
         data.x - x2, data.y - y2,
-        data.x - x2, data.y - y2,
-        data.x - x1, data.y + y1,
         data.x - x1, data.y + y1,
         data.x, data.y + data.length,
       ];
     } else if (data.side == 6) {
       let xvar = data.length * (Math.sin(rad(tetha)) * Math.sin(rad(90 - (1 / 2) * tetha))) / Math.sin(rad((180 - tetha) / 2));
       let yvar = data.length - (xvar * ((Math.sin(rad(tetha / 2))) / Math.sin(rad(90 - (tetha / 2)))));
-      // console.log(xvar);
-      // console.log(data.length * 1 / 2 * Math.sqrt(3));
-      // console.log(yvar);
-      // console.log(data.length - data.length * 1 / 2);
 
       coordinates = [
         data.x, data.y + data.length,
         data.x + xvar, data.y + yvar,
-        data.x + xvar, data.y + yvar,
+
         data.x + xvar, data.y - yvar,
-        data.x + xvar, data.y - yvar,
+
         data.x, data.y - data.length,
-        data.x, data.y - data.length,
+
         data.x - xvar, data.y - yvar,
-        data.x - xvar, data.y - yvar,
+
         data.x - xvar, data.y + yvar,
-        data.x - xvar, data.y + yvar,
-        data.x, data.y + data.length,
+
 
       ];
     } else if (data.side == 7) {
@@ -130,18 +144,11 @@ const getObjCoordinates = (data) => {
       coordinates = [
         data.x, data.y + data.length,
         data.x + x1, data.y + y1,
-        data.x + x1, data.y + y1,
-        data.x + x2, data.y - y2,
         data.x + x2, data.y - y2,
         data.x + x3, data.y - y3,
-        data.x + x3, data.y - y3,
-        data.x - x3, data.y - y3,
         data.x - x3, data.y - y3,
         data.x - x2, data.y - y2,
-        data.x - x2, data.y - y2,
         data.x - x1, data.y + y1,
-        data.x - x1, data.y + y1,
-        data.x, data.y + data.length,
       ];
     } else if (data.side == 8) {
       let xvar = data.length * (Math.sin(rad(tetha)) * Math.sin(rad(90 - (1 / 2) * tetha))) / Math.sin(rad((180 - tetha) / 2));
@@ -150,20 +157,12 @@ const getObjCoordinates = (data) => {
       coordinates = [
         data.x, data.y + data.length,
         data.x + xvar, data.y + yvar,
-        data.x + xvar, data.y + yvar,
-        data.x + data.length, data.y,
         data.x + data.length, data.y,
         data.x + xvar, data.y - yvar,
-        data.x + xvar, data.y - yvar,
-        data.x, data.y - data.length,
         data.x, data.y - data.length,
         data.x - xvar, data.y - yvar,
-        data.x - xvar, data.y - yvar,
-        data.x - data.length, data.y,
         data.x - data.length, data.y,
         data.x - xvar, data.y + yvar,
-        data.x - xvar, data.y + yvar,
-        data.x, data.y + data.length,
       ];
     }
   }
@@ -183,3 +182,31 @@ function hexToRgb(hex) {
 function rad(degree) {
   return degree * (Math.PI / 180);
 }
+
+const importFile = () => {
+  let file = document.getElementById("file");
+
+  let { files } = file;
+  let [uploaded] = files;
+
+  console.log(files, uploaded);
+
+  if (files) {
+    let fileNameEl = document.getElementById("fileName");
+    fileNameEl.textContent = `${uploaded.name} is uploaded!`;
+
+    var reader = new FileReader();
+    reader.readAsText(uploaded, "UTF-8");
+
+    reader.onload = function (e) {
+      itemObj = JSON.parse(e.target.result);
+      inputData.push(itemObj);
+      main(inputData);
+    };
+    reader.onerror = function (e) {
+      alert("Error importing file!");
+    };
+  }
+};
+
+console.log(inputData);

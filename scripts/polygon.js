@@ -5,7 +5,7 @@ function drawPolygon(data, gl, color) {
   // draw polygon on canvas
   var primitiveType = gl.TRIANGLE_FAN;
   var offset = 0;
-  var count = data.side * 2;
+  var count = data.side;
   gl.drawArrays(primitiveType, offset, count);
   drawPoints(data.coordinates, gl, color);
 }

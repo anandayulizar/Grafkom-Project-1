@@ -42,9 +42,6 @@
     <div class="draw tab" id="draw">
       <h1>Start Drawing</h1>
       <div class="container">
-        <div class="canvas-container">
-          <canvas id="glCanvas"></canvas>
-        </div>
         <div class="toolbox">
           <form class="new-form" name="newForm">
             <input type="radio" id="line" name="shape" value="line" onclick="getShapeOpt(this.value)" />
@@ -83,13 +80,12 @@
             <div class="btn-container">
               <button type="submit">Draw Item</button>
               <button type="submit">Delete Item</button>
+              <input type="file" name="file" id="file" onchange="importFile()">
+              <label for="file" class="file"><span>Import File</span></label>
             </div>
           </form>
-
-          <div class="drawn">
-
-          </div>
         </div>
+
         <div class="toolbox">
           <h4></h4>
           <form class="update-form" name="updateForm">
@@ -101,18 +97,19 @@
               <button type="submit">Update Item</button>
             </div>
           </form>
-
-          <div class="drawn">
-
-          </div>
+          <div id="fileName"></div>
         </div>
-
       </div>
+      <div class="canvas-container">
+        <canvas id="glCanvas"></canvas>
+      </div>
+
     </div>
-    <div class="footer">
-      <h4>Tugas Besar Grafika Komputer</h4>
-      <p>&#169;Nanda, Rakha, Fadhil Teknik Informatika ITB 2018</p>
-    </div>
+  </div>
+  <div class="footer">
+    <h4>Tugas Besar Grafika Komputer</h4>
+    <p>&#169;Nanda, Rakha, Fadhil Teknik Informatika ITB 2018</p>
+  </div>
 </body>
 
 <script src="scripts/input.js"></script>
