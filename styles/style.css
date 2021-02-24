@@ -290,7 +290,7 @@ nav .hamburger:hover .hamburger-btn:hover {
   color: white;
 }
 .main .draw .container .toolbox input {
-  margin: 10px 0;
+  margin: 2.5px 0;
   cursor: pointer;
   position: relative;
 }
@@ -326,7 +326,7 @@ nav .hamburger:hover .hamburger-btn:hover {
 }
 .main .draw .container .toolbox .n-side {
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   background: white;
   padding: 8px;
   border-radius: 4px;

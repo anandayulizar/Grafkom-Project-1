@@ -118,9 +118,9 @@ const isInObject = (object) => {
         } else {
             return false;
         }
-    } else if (object.shape == 'line') {
+    } else {
         let coordinatePicked = false;
-        for (let i = 0; i < 4; i += 2) {
+        for (let i = 0; i < object.coordinates.length; i += 2) {
             if (globalState.mouse.x > object.coordinates[i] - globalState.offset &&
                 globalState.mouse.x < object.coordinates[i] + globalState.offset &&
                 globalState.mouse.y > object.coordinates[i + 1] - globalState.offset &&

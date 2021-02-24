@@ -50,9 +50,29 @@ function drawScene(gl, program, inputData) {
 
     if (data.shape == 'line') {
       drawLine(data, gl, fColorLocation);
-    } else {
+    } else if (data.shape == 'square') {
       drawSquare(data, gl, fColorLocation);
+    } else if (data.shape == 'polygon') {
+      drawPolygon(data, gl, fColorLocation)
     }
 
   })
+}
+
+const drawPoints = (coord, gl, color) => {
+  for (let i = 0; i < coord.length; i += 2) {
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      coord[i] - globalState.offset, coord[i + 1] - globalState.offset,
+      coord[i] - globalState.offset, coord[i + 1] + globalState.offset,
+      coord[i] + globalState.offset, coord[i + 1] - globalState.offset,
+      coord[i] + globalState.offset, coord[i + 1] + globalState.offset,
+    ]), gl.STATIC_DRAW);
+
+    gl.uniform4f(color, 0, 0, 0, 0.5);
+    var primitiveType = gl.TRIANGLE_STRIP;
+    var offset = 0;
+    var count = 4;
+
+    gl.drawArrays(primitiveType, offset, count);
+  }
 }
