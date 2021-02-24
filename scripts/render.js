@@ -49,6 +49,7 @@ function drawScene(gl, program, inputData) {
       console.log('Is not a square')
     }
     // Temporary because there is only a square
-    drawSquare(data.x, data.y, data.length, gl);
+    if(data.shape=='square') drawSquare(data.x, data.y, data.length, gl);
+    else drawPolygon(data.x, data.y, data.length, gl);
   })
 }
