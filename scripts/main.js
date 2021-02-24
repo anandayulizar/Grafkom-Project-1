@@ -5,6 +5,7 @@ let globalState = {
     },
     pickedIdx: -1,
     pickedCoordCount: -1,
+    offset: 5,
 }
 
 function main() {
@@ -51,13 +52,28 @@ function main() {
         console.log('mouseup');
         const bound = canvas.getBoundingClientRect()
         if (globalState.pickedIdx != -1 && globalState.pickedCoordCount != -1) {
-            x = event.clientX - bound.left;
-            y = canvas.height - (event.clientY - bound.top);
-            console.log(inputData)
-            console.log(globalState.pickedIdx)
+            const res = {
+                x: event.clientX - bound.left,
+                y: canvas.height - (event.clientY - bound.top)
+            }
+            globalState.mouse = res
 
-            inputData[globalState.pickedIdx].coordinates[globalState.pickedCoordCount] = x;
-            inputData[globalState.pickedIdx].coordinates[globalState.pickedCoordCount + 1] = y;
+            let selectedObj = { ...inputData[globalState.pickedIdx] }
+
+            if (selectedObj.shape != 'square') {
+                selectedObj.coordinates[globalState.pickedCoordCount] = res.x;
+                selectedObj.coordinates[globalState.pickedCoordCount + 1] = res.y;
+            } else {
+                // Berdasarkan spek, square saat memindahkan titik sudt
+                // Harus rescale
+                let xDiff = res.x - selectedObj.x;
+                let yDiff = res.y - selectedObj.y;
+                selectedObj.length = Math.max(Math.abs(xDiff), Math.abs(yDiff)) * 2;
+                selectedObj.coordinates = getObjCoordinates(selectedObj);
+            }
+
+
+            inputData[globalState.pickedIdx] = selectedObj
 
             main();
         }
@@ -81,16 +97,16 @@ const pickObject = () => {
 
 const isInObject = (object) => {
     if (object.shape == 'square') {
-        if (globalState.mouse.x > object.coordinates[0] - 10 &&
-            globalState.mouse.x < object.coordinates[6] + object.length + 10 &&
-            globalState.mouse.y > object.coordinates[1] - 10 &&
-            globalState.mouse.y < object.coordinates[7] + object.length + 10) {
+        if (globalState.mouse.x > object.coordinates[0] - globalState.offset &&
+            globalState.mouse.x < object.coordinates[6] + object.length + globalState.offset &&
+            globalState.mouse.y > object.coordinates[1] - globalState.offset &&
+            globalState.mouse.y < object.coordinates[7] + object.length + globalState.offset) {
             let coordinatePicked = false;
             for (let i = 0; i < 8; i += 2) {
-                if (globalState.mouse.x > object.coordinates[i] - 10 &&
-                    globalState.mouse.x < object.coordinates[i] + 10 &&
-                    globalState.mouse.y > object.coordinates[i + 1] - 10 &&
-                    globalState.mouse.y < object.coordinates[i + 1] + 10) {
+                if (globalState.mouse.x > object.coordinates[i] - globalState.offset &&
+                    globalState.mouse.x < object.coordinates[i] + globalState.offset &&
+                    globalState.mouse.y > object.coordinates[i + 1] - globalState.offset &&
+                    globalState.mouse.y < object.coordinates[i + 1] + globalState.offset) {
                     globalState.pickedCoordCount = i;
                     coordinatePicked = true;
                 }
@@ -105,10 +121,10 @@ const isInObject = (object) => {
     } else if (object.shape == 'line') {
         let coordinatePicked = false;
         for (let i = 0; i < 4; i += 2) {
-            if (globalState.mouse.x > object.coordinates[i] - 10 &&
-                globalState.mouse.x < object.coordinates[i] + 10 &&
-                globalState.mouse.y > object.coordinates[i + 1] - 10 &&
-                globalState.mouse.y < object.coordinates[i + 1] + 10) {
+            if (globalState.mouse.x > object.coordinates[i] - globalState.offset &&
+                globalState.mouse.x < object.coordinates[i] + globalState.offset &&
+                globalState.mouse.y > object.coordinates[i + 1] - globalState.offset &&
+                globalState.mouse.y < object.coordinates[i + 1] + globalState.offset) {
                 globalState.pickedCoordCount = i;
                 coordinatePicked = true;
             }
@@ -121,23 +137,4 @@ const isInObject = (object) => {
     }
 }
 
-main([])
-
-// main([{
-//     x: 100,
-//     y: 100,
-//     id: 1,
-//     color: {
-//         r: 0,
-//         g: 0,
-//         b: 0
-//     },
-//     shape: 'square',
-//     length: 100,
-//     coordinates: [
-//         100, 100,
-//         200, 100,
-//         100, 200,
-//         200, 200
-//     ]
-// }]);
+main()

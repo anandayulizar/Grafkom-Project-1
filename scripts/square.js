@@ -13,10 +13,10 @@ function drawSquare(data, gl, color) {
 
   for (let i = 0; i < 8; i += 2) {
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-      coord[i] - 10, coord[i + 1] - 10,
-      coord[i] - 10, coord[i + 1] + 10,
-      coord[i] + 10, coord[i + 1] - 10,
-      coord[i] + 10, coord[i + 1] + 10,
+      coord[i] - globalState.offset, coord[i + 1] - globalState.offset,
+      coord[i] - globalState.offset, coord[i + 1] + globalState.offset,
+      coord[i] + globalState.offset, coord[i + 1] - globalState.offset,
+      coord[i] + globalState.offset, coord[i + 1] + globalState.offset,
     ]), gl.STATIC_DRAW);
 
     gl.uniform4f(color, 0, 0, 0, 0.5);

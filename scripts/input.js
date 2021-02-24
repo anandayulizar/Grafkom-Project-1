@@ -5,6 +5,25 @@ const newForm = document.querySelector('.new-form');
 const updateForm = document.querySelector('.update-form');
 
 
+// let inputData = [{
+//   x: 100,
+//   y: 100,
+//   id: 0,
+//   color: {
+//     r: 0,
+//     g: 0,
+//     b: 0
+//   },
+//   shape: 'square',
+//   length: 100,
+//   coordinates: [
+//     100, 100,
+//     200, 100,
+//     100, 200,
+//     200, 200
+//   ]
+// }];
+
 let inputData = [];
 
 newForm.addEventListener("submit", e => onSubmit(e));
@@ -23,7 +42,7 @@ const onSubmit = e => {
     itemObj["color"] = hexToRgb(document.newForm.color.value);
   }
 
-  itemObj["coordinates"] = getObjData(itemObj);
+  itemObj["coordinates"] = getObjCoordinates(itemObj);
   itemObj["id"] = inputData.length;
 
   inputData.push(itemObj);
@@ -38,9 +57,6 @@ const onUpdate = e => {
   let itemObj = {};
   itemObj["color"] = hexToRgb(document.updateForm.color.value);
 
-  console.log(inputData[globalState.pickedIdx])
-  console.log(globalState.pickedIdx)
-
   inputData[globalState.pickedIdx] = {
     ...itemObj,
     id: globalState.pickedIdx,
@@ -49,13 +65,19 @@ const onUpdate = e => {
   main(inputData);
 }
 
-const getObjData = (data) => {
+const getObjCoordinates = (data) => {
   let coordinates = [];
   if (data.shape == 'square') {
-    coordinates.push(data.x, data.y);
-    coordinates.push(data.x + data.length, data.y);
-    coordinates.push(data.x, data.y + data.length);
-    coordinates.push(data.x + data.length, data.y + data.length);
+    coordinates.push(data.x - (data.length / 2), data.y - (data.length / 2));
+    coordinates.push(data.x + (data.length / 2), data.y - (data.length / 2));
+    coordinates.push(data.x - (data.length / 2), data.y + (data.length / 2));
+    coordinates.push(data.x + (data.length / 2), data.y + (data.length / 2));
+
+    // coordinates.push(data.x, data.y);
+    // coordinates.push(data.x + data.length, data.y);
+    // coordinates.push(data.x, data.y + data.length);
+    // coordinates.push(data.x + data.length, data.y + data.length);
+    // console.log(coordinates)
   } else if (data.shape == 'line') {
     coordinates.push(data.x, data.y);
     coordinates.push(data.x + data.length, data.y);
