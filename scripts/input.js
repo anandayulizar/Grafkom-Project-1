@@ -3,6 +3,7 @@ const formsContainer = document.querySelector('.form-container');
 const showInputContainer = document.querySelector('.show-input-container');
 const newForm = document.querySelector('.new-form');
 const updateForm = document.querySelector('.update-form');
+const deleteButton = document.getElementById('deleteButton');
 
 
 // let inputData = [{
@@ -28,6 +29,10 @@ let inputData = [];
 
 newForm.addEventListener("submit", e => onSubmit(e));
 updateForm.addEventListener("submit", e => onUpdate(e));
+deleteButton.addEventListener('click', () => {
+  inputData.pop();
+  main();
+})
 
 var saveData = (function () {
   var a = document.createElement("a");
@@ -83,7 +88,7 @@ const onUpdate = e => {
   itemObj["color"] = hexToRgb(document.updateForm.color.value);
 
   inputData[globalState.pickedIdx].color = { ...itemObj.color }
-  main(inputData);
+  main();
 }
 
 const getObjCoordinates = (data) => {
