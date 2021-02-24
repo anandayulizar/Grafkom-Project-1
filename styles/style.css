@@ -270,6 +270,11 @@ nav .hamburger:hover .hamburger-btn:hover {
 .main .draw .container {
   margin-bottom: 80px;
 }
+
+.main .draw .container .toolboxes {
+  display: flex;
+  flex-direction: column;
+}
 .main .draw .container .toolbox {
   box-sizing: border-box;
   background: linear-gradient(-15deg, #2883ab, #a580e8);
@@ -310,7 +315,7 @@ nav .hamburger:hover .hamburger-btn:hover {
   color: white;
 }
 .main .draw .container .toolbox input {
-  margin: 10px 0;
+  margin: 2.5px 0;
   cursor: pointer;
   position: relative;
 }
@@ -352,6 +357,7 @@ nav .hamburger:hover .hamburger-btn:hover {
   color: #5f3d9a;
   font-weight: 500;
 }
+
 .main .draw .container #fileName {
   display: block;
   text-align: center;

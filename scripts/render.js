@@ -1,5 +1,4 @@
 function drawScene(gl, program, inputData) {
-  console.log(inputData)
   // Clear the canvas
   gl.clearColor(0, 0, 0, 0);
   gl.clear(gl.COLOR_BUFFER_BIT);
@@ -43,13 +42,37 @@ function drawScene(gl, program, inputData) {
 
     // at render time
     gl.uniform4f(fColorLocation, data.color.r, data.color.g, data.color.b, 1);
-    if (data.shape == 'square') {
-      console.log('Is a square');
-    } else {
-      console.log('Is not a square')
+    // if (data.shape == 'square') {
+    //   console.log('Is a square');
+    // } else {
+    //   console.log('Is not a square')
+    // }
+
+    if (data.shape == 'line') {
+      drawLine(data, gl, fColorLocation);
+    } else if (data.shape == 'square') {
+      drawSquare(data, gl, fColorLocation);
+    } else if (data.shape == 'polygon') {
+      drawPolygon(data, gl, fColorLocation)
     }
-    // Temporary because there is only a square
-    if(data.shape=='square') drawSquare(data.x, data.y, data.length, gl);
-    else drawPolygon(data.x, data.y, data.length, gl);
+
   })
+}
+
+const drawPoints = (coord, gl, color) => {
+  for (let i = 0; i < coord.length; i += 2) {
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      coord[i] - globalState.offset, coord[i + 1] - globalState.offset,
+      coord[i] - globalState.offset, coord[i + 1] + globalState.offset,
+      coord[i] + globalState.offset, coord[i + 1] - globalState.offset,
+      coord[i] + globalState.offset, coord[i + 1] + globalState.offset,
+    ]), gl.STATIC_DRAW);
+
+    gl.uniform4f(color, 0, 0, 0, 0.5);
+    var primitiveType = gl.TRIANGLE_STRIP;
+    var offset = 0;
+    var count = 4;
+
+    gl.drawArrays(primitiveType, offset, count);
+  }
 }
