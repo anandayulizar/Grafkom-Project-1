@@ -38,6 +38,43 @@
     </div>
     <div class="help tab" id="help">
       <h1>Tutorial</h1>
+      <div class="tutorial-container">
+        <div>
+          <h2>Cara membuat objek</h2>
+          <ol>
+            <li>Pilih jenis objek yang ingin dibuat</li>
+            <li>Masukkan titik koordinat objek</li>
+            <li>Masukkan panjang sisi dari objek</li>
+            <li>Pilih warna objek</li>
+            <li>Klik tombol Draw Item</li>
+          </ol>
+        </div>
+        <div>
+          <h2>Cara menyimpan objek</h2>
+          <ol>
+            <li>Pastikan gambar yang ingin disimpan sudah dibuat</li>
+            <li>Klik Save Item</li>
+            <li>Masukkan nama file (tanpa extension) pada prompt</li>
+            <li>Klik OK pada prompt</li>
+          </ol>
+        </div>
+        <div>
+          <h2>Cara mengimport objek</h2>
+          <ol>
+            <li>Pastikan sudah memiliki file berformat .json berisi array dari objek</li>
+            <li>Tiap objek pada file memiliki kriteria sebagai berikut</li>
+            <ul>
+              <li>Nama bentuk ("shape":"square")</li>
+              <li>Warna (color: {"r":0,"g":0,"b":0})</li>
+              <li>Koordinar titik pusat ("x":400,"y":400)</li>
+              <li>Panjang sisi ("length":200)</li>
+            </ul>
+            <li>Klik "Import File"</li>
+            <li>Pilih file JSON yang ingin diimport</li>
+            <li>Klik "Open"</li>
+          </ol>
+        </div>
+      </div>
     </div>
     <div class="draw tab" id="draw">
       <h1>Start Drawing</h1>

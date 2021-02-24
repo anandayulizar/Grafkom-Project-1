@@ -214,11 +214,10 @@ const importFile = () => {
       uploadedObj.forEach(item => inputData.push(item));
       main(inputData);
     };
-    
+
     reader.onerror = function (e) {
       alert("Error importing file!");
     };
   }
 };
 
-console.log(inputData);
