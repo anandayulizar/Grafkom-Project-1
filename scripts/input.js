@@ -60,11 +60,11 @@ const onSubmit = async (e) => {
     } else {
       itemObj[pair[0]] = pair[1];
     }
-
   }
-
   itemObj["coordinates"] = getObjCoordinates(itemObj);
   itemObj["id"] = inputData.length;
+
+  itemObj["color"] = hexToRgb(itemObj["color"]);
 
   inputData.push(itemObj);
   main(inputData);
